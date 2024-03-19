@@ -1,0 +1,198 @@
+//- mixins
+mixin navegacion(link, icon, nombre)
+  li.nav-item.mr-3: a.nav-link(href= link): i(class= icon aria-hidden="true"): span.d-md-none.ml-2= nombre
+    if block
+      block
+mixin portfolio(foto, alt, titulo, iconclass, href, button, clase)  
+    .card.efecto.my-3
+      img.card-img-top(src= foto alt= alt)
+      .card-body.project-tile
+        h5.project-tile= titulo
+          i.ml-3(class= iconclass)
+        a(href= href target="_blank" class= clase).btn.btn-outline-secondary.btn-lg.btn-block#profile-link= button
+mixin navSobreMi(activeCl,idTab, hrefId, ariaCtrl, ariaBolean, title)
+  li.nav-item
+    a.nav-link(class= activeCl id= idTab data-toggle="tab" href= hrefId role="tab" aria-controls= ariaCtrl aria-selected= ariaBolean)= title
+    if block
+      block
+mixin contenidoSobreMi(clsShow, clsActive, idName, labelName)
+  div.tab-pane.fade(class= clsShow class= clsActive id= idName role="tabpanel" arialabelledby= labelName)
+    if block
+      block
+mixin contactoLista (fonticon,link, name, social)
+          li.list-group-item.list-group-item-action: a.list-group-item-action.lead(href= link target='_blank')= name
+            i.ml-2.fab(class= fonticon social)
+            if block
+              block
+mixin footerNav(link, icon)
+  li.nav-item
+    a.nav-link(href= link target="_blank")
+      i.text-white.fab(class= icon) 
+
+mixin progressBar(title, styleWidth, ariaValueNow)
+  p.mb-0= title
+  .progress.mb-3
+    .progress-bar.progress-bar-striped.bg-secondary(role="progressbar" style= styleWidth aria-valuenow= ariaValueNow aria-valuemin="0" aria-valuemax="100")
+      
+//- fin /mixins
+
+//- navegacion
+
+nav.navbar.navbar-expand-md.navbar-dark.bg-dark.sticky-top#navbar
+  a.navbar-brand.name(href='#welcome-section')
+  button.navbar-toggler(type="button" data-toggle="collapse" data-target="#miNavegacion" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+    span.navbar-toggler-icon
+  .collapse.navbar-collapse.justify-content-end#miNavegacion
+    ul.navbar-nav
+      +navegacion('#welcome-section','fa fa-home', 'welcome-section')
+      +navegacion('#projects','fa fa-folder', 'Portfolio')
+      +navegacion('#sobreMi','fa fa-user', 'Sobre Mi')
+      +navegacion('#contacto','fa fa-envelope', 'Contacto')
+      li.nav-item.mr-3: a(href="https://www.dropbox.com/s/tx3xce0l3ep6ay2/curriculum-1.pdf?dl=0" target="_blank").text-muted: button.btn.btn-outline-secondary(type="button")
+        i.fa.fa-download.mr-2(aria-hidden="true")
+        |descargar CV
+//- fin /navegacion
+
+//- Header
+
+//- .text-center.hero-text.d-block.my-5
+
+header.hero-image#welcome-section
+  .container-fluid.h-100
+    .row.h-100
+      .col-md-12.my-auto.mx-auto.text-center
+        h1.text-white.display-3: em: strong Diseño y Desarrollo web
+        p.text-white.lead: strong Calidad, responsabilidad y siempre al dia en las ultimas tecnologias en diseño y desarrollo web
+        a.btn.btn-secondary.btn-lg(href="#projects") Ver Portafolio
+          i.fa.fa-folder.ml-2(aria-hidden='true')
+          
+//- fin /Header
+
+//- potafolio
+
+section#projects
+  .container.py-5
+    h2(id="masonry" data-container="body" data-toggle="popover" data-placement="top" data-content="Masonry Cards" style="width: 250px;").my-5.text-dark Portafolio
+      i.fa.fa-folder.ml-2
+    //- problemas con tamaño para tablets
+    .card-columns
+      +portfolio('https://www.infobae.com/new-resizer/3kUE6Rn0sjsbEwYzvNVM_0jMWwU=/768x432/filters:format(webp):quality(85)/arc-anglerfish-arc2-prod-infobae.s3.amazonaws.com/public/K7ARUY7SGZGKNIF4TFTDP4PZW4', 'Andrés Caicedo', 'Build a Tribute Page', 'fab fa-free-code-camp', 'https://codepen.io/CarlosAndresAlzate/full/VbxKKb/', 'Vamos', '')
+      +portfolio('https://shots.codepen.io/username/pen/JjzEpvV-800.jpg?version=1705765260', 'iPod Classic', 'iPod Classic - CSS Illustration', 'fab fa-apple', 'https://codepen.io/CarlosAndresAlzate/pen/JjzEpvV', 'Vamos')
+      +portfolio('https://images.unsplash.com/photo-1489596980528-fcb8113ec104?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ%3D%3D%0A&s=58d3353e7e280cd9eb9dbd5da377b60b', 'ejemplo', 'Proximamente', 'fas fa-times-circle', '#portafolio', 'Proximamente', 'disabled')
+      +portfolio('https://images.unsplash.com/photo-1463797221720-6b07e6426c24?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ%3D%3D%0A&s=96b44f4548f55d146d41e473b1d06ce6', 'ejemplo', 'Proximamente', 'fas fa-times-circle', '#portafolio', 'Proximamente', 'disabled')
+      +portfolio('https://images.unsplash.com/photo-1503007606601-a4ad8257a1ba?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ%3D%3D%0A&s=9ced72565a7923fc2c071a44fec15f27', 'ejemplo', 'Proximamente', 'fas fa-times-circle', '#portafolio', 'Proximamente', 'disabled')
+      +portfolio('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=5715d6f32fdd36241b817345dfb42d35', 'ejemplo','Proximamente', 'fas fa-times-circle', '#portafolio', 'Proximamente', 'disabled')  
+//- fin /potafolio
+
+//- Sobre Mi
+
+section#sobreMi.bg-light
+  .container.py-5
+    h2.my-5.text-dark Sobre Mi
+      i.fa.fa-user.ml-2
+    ul.nav.nav-tabs#myTab(role="tablist")
+      +navSobreMi('active','quienSoy-tab','#quienSoy','quienSoy','true','Quien Soy')
+      +navSobreMi('','misHabilidades-tab','#misHabilidades','misHabilidades','false','Mis Habilidades')
+      +navSobreMi('','misAficiones-tab','#misAficiones','misAficiones','false','Mis Aficiones')
+      
+    .tab-content#mytabContent
+      +contenidoSobreMi('show', 'active','quienSoy','quienSoy-tab')
+        .row.justify-content-center.mt-5
+          .col-md-10.col-sm-12
+            .media.p-3.border.rounded#githubCard
+              img.align-self-center.mr-3.rounded-circle#avatar(width="200px" height="200px")
+              .media-body
+                h3.mt-0: strong.name
+                p.lead#bio
+                .row#githubInfo
+                  .col-md-4.text-center
+                    p.mb-0.text-muted#follower_number
+                    p followers
+                  .col-md-4.text-center
+                    p.mb-0.text-muted#following_number
+                    p followings
+                  .col-md-4.text-center
+                    p.mb-0.text-muted#repos
+                    p repos
+                .row
+                  .col-md-6.text-center.mt-2
+                    a(href="https://www.dropbox.com/s/tx3xce0l3ep6ay2/curriculum-1.pdf?dl=0" target="_blank").text-muted: button.btn.btn-outline-secondary(type="button")
+                      i.fa.fa-download(aria-hidden="true")
+                      |descargar CV
+                  .col-md-6.text-center.mt-2
+                    a#git_link.text-muted(target="_blank"): button.btn.btn-outline-secondary
+                      i.fab.fa-github(aria-hidden="true")
+                      |Github
+                
+      +contenidoSobreMi('','','misHabilidades','misHabilidades-tab')
+        .row.justify-content-center.mt-5
+          .col-md-12
+            .row
+              .col-md-6
+                +progressBar("HTML & CSS", "width:75%", "75")
+                +progressBar("Bootstrap, Bulma, materializecss ...", "width:75%", "75%")
+                +progressBar("Javascript", "width:50%", "50%")
+              .col-md-6
+                +progressBar("Photoshop", "width:75%", "75%")
+                +progressBar("Illustrator", "width:65%", "65%")
+                +progressBar("Indesign", "width:50%", "50%")     
+                
+      +contenidoSobreMi('','','misAficiones','misAficiones-tab')
+        .row.justify-content-center.mt-5
+          .col-md-10.col-sm-12.row
+            .col-md-4.col-sm-5.text-center
+              i.fas.fa-basketball-ball.display-2.my-3
+            .col-md-4.col-sm-5.text-center
+              i.fas.fa-laptop.display-2.my-3
+            .col-md-4.col-sm-5.text-center
+              i.fas.fa-camera-retro.display-2.my-3
+            .col-md-4.col-sm-5.text-center
+              i.fab.fa-readme.display-2.my-3
+            .col-md-4.col-sm-5.text-center
+              i.fas.fa-music.display-2.my-3
+            .col-md-4.col-sm-5.text-center
+              i.fas.fa-plane.display-2.my-3
+                
+//- fin /Sobre Mi
+
+//- contacto
+
+section#contacto 
+  .container.py-5
+    h2.my-5.text-dark Contacto
+      i.fa.fa-envelope.ml-2
+    h3.text-center.text-dark Por que no dices hola!
+    p.text-center.text-secondary ¿Listo para estar en contacto conmigo y crear cosas increibles?
+    .row.mt-5
+      .col-md-4.mt-3
+        p.text-muted Tambien Puedes contactarme o ver que estoy haciendo como desarrollador
+        ul.list-group
+          +contactoLista("fa-linkedin-in", "https://www.linkedin.com/in/carlosandresalzate/", "Linkedin", "linkedin")
+          +contactoLista("fa-codepen", "https://codepen.io/CarlosAndresAlzate/", "Codepen")
+          +contactoLista("fa-github", "https://github.com/carlosandresalzate", "Github")
+      .col-md-8
+        form(class="container needs-validation" novalidate)
+          .form-row
+            .col-md-6.mt-3
+              input.form-control(type="text" placeholder="Tu Nombre" disabled)
+            .col-md-6.mt-3
+              input.form-control(type="email" placeholder="Tu Correo" disabled)
+            .col-md-12.mt-3
+              input.form-control(type="text" placeholder="Asunto" disabled)
+            .col-md-12.mt-3
+              textarea.form-control(placeholder="Puedes preguntar y contarme tus ideas" rows="8" disabled)
+            .col-md-12.text-center
+              button(type="submit" disabled).btn.btn-outline-secondary.my-3 Enviar
+    p.text-center.lead.py-5 "Un buen diseño aporta un valor añadido más rápido de lo que agrega costo"
+    
+//- Footer
+
+footer#footer.bg-dark.py-4
+  .container
+    .row
+      .col-md-4.d-flex.align-items-center.justify-content-center
+        .nav-link.text-muted: strong #[em Carlos Andrés Alzate]
+      .col-md-4
+        ul.nav.justify-content-center.navbar-dark
+          +footerNav("https://codepen.io/CarlosAndresAlzate/", "fa-codepen")
+          +footerNav("https://www.freecodecamp.org/carlos_andres_alzate", "fa-free-code-camp")

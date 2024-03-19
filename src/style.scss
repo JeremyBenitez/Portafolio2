@@ -1,0 +1,42 @@
+@function generateGradient($color1, $color2) {
+  @return linear-gradient(90deg, $color1, $color2);
+}
+
+@mixin boxShadow($color) {
+  box-shadow: 0 0 15px 0 $color;
+}
+
+$primaryColor: #212121;
+$secondaryColor: #9E9E9E;
+
+.navbar-brand {
+  font-weight: 600;
+  font-style: italic;
+}
+
+header.hero-image {
+   background-image: url(https://images.unsplash.com/photo-1508830524289-0adcbe822b40?auto=format&fit=crop&w=1311&q=80);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: centern bottom;
+  background-attachment: fixed;
+  height: 100vh;
+  
+  p {
+    text-shadow: 0 0 4px $primaryColor;
+  }
+}
+
+.efecto:hover {
+  transform: scale(1.01, 1.01);
+  @include boxShadow($secondaryColor);
+  transition: all 0.4 ease;
+}
+
+@media only screen and (max-width: 575.98px) {
+  #mytabContent #githubCard {
+    // color: green !important;
+    display: flex;
+    flex-direction: column;
+  }
+}
